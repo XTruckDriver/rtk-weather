@@ -1,15 +1,24 @@
 "use client";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/navigation';
-import { deleteCity } from "./cityListSlice";
+import { deleteCity, fetchGeoCodes } from "./cityListSlice";
 
 
 const CityList = () => {
   const cities = useSelector((state) => state.cityList.cityList);
+  const status = useSelector((state) => state.cityList.status);
+  const error = useSelector((state) => state.cityList.error);
   const dispatch = useDispatch();
   const router = useRouter();
   console.log(cities);
+
+  useEffect(() => {
+    cities.forEach(city => {
+      console.log("fetchGeoCodes for : ",city.name);
+      dispatch(fetchGeoCodes(city.name));
+    });
+  }, [cities, dispatch]);
 
   
   const handleDeleteClick = (id) => {
@@ -25,14 +34,22 @@ const CityList = () => {
     if (!Array.isArray(cities) || cities.length === 0) {
       return <p>No cities available.</p>;
     }
-      return cities.map((city) => {
-        return (
-          <li key={city.id}>
+
+    if (status === 'loading') {
+      return <p>Loading...</p>;
+    }
+
+    if (status === 'failed') {
+      return <p>Error: {error}</p>;
+    }
+
+    return cities.map((city) => (
+      <li key={city.id}>
             <button onClick={() => handleDeleteClick(city.id)}>Delete City</button>
             {city.name}: {city.temp} Degrees
           </li>
-        );
-      });
+        
+    ));
     
   };
 
