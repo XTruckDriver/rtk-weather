@@ -44,10 +44,21 @@ const CityList = () => {
     }
 
     return cities.map((city) => (
-      <li key={city.id}>
-            <button onClick={() => handleDeleteClick(city.id)}>Delete City</button>
-            {city.name}: {city.temp} Degrees
-          </li>
+      <ul className='list-group list-group-horizontal text-center' key={city.id}>
+        <li className='list-group-item col-3'>
+          {city.name}
+        </li>
+        <li className='list-group-item col-3'>
+          {city.temp}
+        </li>
+        <li className='list-group-item col-3'>
+          <button onClick={() => handleDeleteClick(city.id)}>Delete City</button>
+        </li>
+        <li className='list-group-item col-3'>
+          Humidy
+        </li>
+      </ul>
+      
         
     ));
     
@@ -55,12 +66,17 @@ const CityList = () => {
 
 
   return (
-    <>
-      <h2> List of Cities </h2>
-      <ul>
-        {renderCities()}
-      </ul>
-    </>
+    <div className='container'>
+      <h5> List of Cities </h5>
+      <div className='row text-center'>
+        <div className='col-3'><strong>City</strong></div>
+        <div className='col-3'><strong>Temperature (F)</strong></div>
+        <div className='col-3'><strong>Pressure (hPa)</strong></div>
+        <div className='col-3'><strong>Humidity (%)</strong></div>
+      </div>
+      {renderCities()}
+      
+    </div>
   );
 };
 
