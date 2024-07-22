@@ -49,7 +49,7 @@ const CityList = () => {
           {city.name}
         </li>
         <li className='list-group-item col-3'>
-          {city.temp}
+          Temperature
         </li>
         <li className='list-group-item col-3'>
           <button onClick={() => handleDeleteClick(city.id)}>Delete City</button>
@@ -67,7 +67,6 @@ const CityList = () => {
 
   return (
     <div className='container'>
-      <h5> List of Cities </h5>
       <div className='row text-center'>
         <div className='col-3'><strong>City</strong></div>
         <div className='col-3'><strong>Temperature (F)</strong></div>

@@ -6,9 +6,9 @@ const APIkey = "dd9d476f3e18502da2edd15a3502cd8d";
 
 const initialState = {
  cityList: [
-  { name: "Chicago", temp: 56, id: 84658893 },
-  { name: "Denver", temp: 52, id: 66387769 },
-  { name: "Nashville", temp: 65, id: 31339895 },
+  { name: "Chicago", id: 84658893 },
+  { name: "Denver", id: 66387769 },
+  { name: "Nashville", id: 31339895 },
   ],
   status: 'idle',
   error: null,
