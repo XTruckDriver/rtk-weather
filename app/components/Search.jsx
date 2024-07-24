@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { addCity } from "../features/cityList/cityListSlice";
+import { fetchGeoCodes } from "../features/cityList/cityListSlice";
 
 
 const Search = () => {
@@ -12,11 +13,8 @@ const Search = () => {
     event.preventDefault();
     console.log("add new city to list");
     dispatch(
-      addCity({
-        name: newSearch,
-        id: Math.floor(Math.random() * 90000000) + 10000000,
-      })
-    );
+      fetchGeoCodes(newSearch));
+    
   };
 
   return (

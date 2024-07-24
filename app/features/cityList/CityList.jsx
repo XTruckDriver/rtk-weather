@@ -11,14 +11,8 @@ const CityList = () => {
   const error = useSelector((state) => state.cityList.error);
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(cities);
 
-  useEffect(() => {
-    cities.forEach(city => {
-      console.log("fetchGeoCodes for : ",city.name);
-      dispatch(fetchGeoCodes(city.name));
-    });
-  }, [cities, dispatch]);
+
 
   
   const handleDeleteClick = (id) => {
