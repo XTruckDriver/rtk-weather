@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { addCity } from "../features/cityList/cityListSlice";
 import { fetchGeoCodes } from "../features/cityList/cityListSlice";
 
 
@@ -11,7 +10,6 @@ const Search = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("add new city to list");
     dispatch(
       fetchGeoCodes(newSearch));
     
