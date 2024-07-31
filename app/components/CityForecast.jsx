@@ -6,14 +6,27 @@ import { deleteCity } from "../features/cityList/cityListSlice";
 import { Sparklines, SparklinesLine, SparklinesReferenceLine } from "react-sparklines";
 
 
-function CityForecast({city}, index) { 
+function CityForecast({city}) { 
 
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const tempArray = city.weatherArrays.temp; 
+  const tempArray = city.weatherArrays.temp;
   const pressureArray = city.weatherArrays.pressure;
   const humidityArray = city.weatherArrays.humidity;
+  const cityName = (city.name).charAt(0).toUpperCase() + (city.name).slice(1);
+
+  const computeAverage = (array) => {
+    if(!Array.isArray(array) || array.length === 0) {
+      console.log("Error with array");
+      return 0;
+    }
+
+    let sum = array.reduce((a, b) => a + b, 0);
+    let avg = (sum / array.length);
+    console.log(`The sum is: ${sum} and the average is ${avg}`);
+    return Math.round(avg);
+  };
 
   const handleDeleteClick = (id) => {
     dispatch(
@@ -26,27 +39,29 @@ function CityForecast({city}, index) {
     <>
       <ul className='list-group list-group-horizontal text-center' >
         <li className='list-group-item col-3'>
-          <h3>{city.name}</h3>
+          <h3>{cityName}</h3>
           <button onClick={() => handleDeleteClick(city.id)}>Delete City</button>
         </li>
         <li className='list-group-item col-3'>
           <Sparklines limit={40} width={200} height={100} data={tempArray} >
-            <SparklinesLine />
+            <SparklinesLine color="#40c0f5" />
             <SparklinesReferenceLine type="avg" />
           </Sparklines>
-          <span>56 Degrees</span>
+          <span>{computeAverage(tempArray)} F</span>
         </li>
         <li className='list-group-item col-3'>
           <Sparklines limit={40} width={200} height={100} data={pressureArray} >
-            <SparklinesLine />
+            <SparklinesLine color="#d1192e" />
             <SparklinesReferenceLine type="avg" />
           </Sparklines>
+          <span>{computeAverage(pressureArray)} hPa</span>
         </li>
         <li className='list-group-item col-3'>
           <Sparklines limit={40} width={200} height={100} data={humidityArray} >
-            <SparklinesLine />
+            <SparklinesLine color="#8ed53f" />
             <SparklinesReferenceLine type="avg" />
           </Sparklines>
+          <span>{computeAverage(humidityArray)}%</span>
         </li>
       </ul>
     </>
