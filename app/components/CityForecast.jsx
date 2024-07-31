@@ -1,22 +1,19 @@
 "use client";
 import React from "react";
-import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation'
 import { deleteCity } from "../features/cityList/cityListSlice";
-import { fetchForecast } from "../features/cityList/cityListSlice";
+import { Sparklines, SparklinesLine, SparklinesReferenceLine } from "react-sparklines";
 
 
-function CityForecast({name, id, lat, lon}) {
-  const dispatch = useDispatch();
+function CityForecast({city}, index) { 
+
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  
-  dispatch(
-      fetchForecast({lat, lon})
-    );
- ;
-  
-
+  const tempArray = city.weatherArrays.temp; 
+  const pressureArray = city.weatherArrays.pressure;
+  const humidityArray = city.weatherArrays.humidity;
 
   const handleDeleteClick = (id) => {
     dispatch(
@@ -29,16 +26,27 @@ function CityForecast({name, id, lat, lon}) {
     <>
       <ul className='list-group list-group-horizontal text-center' >
         <li className='list-group-item col-3'>
-          <h3>{name}</h3>
+          <h3>{city.name}</h3>
+          <button onClick={() => handleDeleteClick(city.id)}>Delete City</button>
         </li>
         <li className='list-group-item col-3'>
-          ID = {id} lat = {lat} lon = {lon}
+          <Sparklines limit={40} width={200} height={100} data={tempArray} >
+            <SparklinesLine />
+            <SparklinesReferenceLine type="avg" />
+          </Sparklines>
+          <span>56 Degrees</span>
         </li>
         <li className='list-group-item col-3'>
-          <button onClick={() => handleDeleteClick(id)}>Delete City</button>
+          <Sparklines limit={40} width={200} height={100} data={pressureArray} >
+            <SparklinesLine />
+            <SparklinesReferenceLine type="avg" />
+          </Sparklines>
         </li>
         <li className='list-group-item col-3'>
-          Humidity
+          <Sparklines limit={40} width={200} height={100} data={humidityArray} >
+            <SparklinesLine />
+            <SparklinesReferenceLine type="avg" />
+          </Sparklines>
         </li>
       </ul>
     </>

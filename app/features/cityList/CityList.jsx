@@ -1,13 +1,28 @@
 "use client";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import CityForecast from '@/app/components/CityForecast';
+import { fetchForecast } from './cityListSlice';
 
 
 const CityList = () => {
   const cities = useSelector((state) => state.cityList.cityList);
   const status = useSelector((state) => state.cityList.status);
   const error = useSelector((state) => state.cityList.error);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    
+   
+
+    cities.forEach((city, index) => {
+      
+        dispatch(fetchForecast({lat:city.lat, lon:city.lat, index}));
+    
+    });
+
+  }, [cities.length, dispatch]);
+
 
   return (
     <div className='container'>
@@ -19,7 +34,9 @@ const CityList = () => {
       </div> 
       {
         cities.map((city, index) => (
-          <CityForecast key={index} name={city.name} id={city.id} lat={city.lat} lon={city.lon}/>
+  
+          <CityForecast key={index} city={city} index={index} />
+
           ))
        }
       </div>
