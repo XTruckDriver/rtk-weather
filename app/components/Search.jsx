@@ -12,6 +12,8 @@ const Search = () => {
     event.preventDefault();
     dispatch(
       fetchGeoCodes(newSearch));
+
+    setNewSearch("");
     
   };
 
