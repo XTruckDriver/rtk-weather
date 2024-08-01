@@ -24,10 +24,6 @@ const CityList = () => {
 
   }, [cities.length, dispatch]);
 
-  const renderCities = () => {
-
-  }
-
 
   return (
     <div className='container mt-5'>
@@ -40,7 +36,7 @@ const CityList = () => {
       
       {
         !Array.isArray(cities) || cities.length === 0 && (
-          <p>No cities: Enter a city above to see forecast</p>
+          <p className='mt-5 text-center display-6' >No cities: Enter a city above to see forecast</p>
         )
       }
       {
