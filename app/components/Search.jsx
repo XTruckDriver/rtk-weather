@@ -19,6 +19,7 @@ const Search = () => {
 
   return (
     <>
+    <div className="container m-4">
       <form onSubmit={handleSubmit}>
         <label>Enter City: 
           <input
@@ -29,6 +30,7 @@ const Search = () => {
         </label>
         <input type="submit" />
       </form>
+      </div>
     </>
   )
 

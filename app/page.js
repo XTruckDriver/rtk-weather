@@ -10,7 +10,10 @@ export default function Home() {
 
   return (
     <main>
-      <h1>RTK Weather</h1>
+      <div className="container m-5 text-center " >
+        <h1 >RTK Weather</h1>
+      </div>
+      
       <App />
       
     </main>
