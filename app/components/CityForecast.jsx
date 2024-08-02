@@ -39,23 +39,23 @@ function CityForecast({city}) {
       <ul className='list-group list-group-horizontal text-center' >
         <li className='list-group-item col-3 p-5'>
           <h3>{cityName}</h3>
-          <button onClick={() => handleDeleteClick(city.id)}>Delete</button>
+          <button onClick={() => handleDeleteClick(city.id)} className="btn btn-danger">Delete</button>
         </li>
-        <li className='list-group-item col-3 p-3'>
+        <li className='list-group-item col-3'>
           <Sparklines limit={40} width={200} height={100} data={tempArray} >
             <SparklinesLine color="#40c0f5" />
             <SparklinesReferenceLine type="avg" />
           </Sparklines>
           <span>{computeAverage(tempArray)} F</span>
         </li>
-        <li className='list-group-item col-3 p-3'>
+        <li className='list-group-item col-3'>
           <Sparklines limit={40} width={200} height={100} data={pressureArray} >
             <SparklinesLine color="#d1192e" />
             <SparklinesReferenceLine type="avg" />
           </Sparklines>
           <span>{computeAverage(pressureArray)} hPa</span>
         </li>
-        <li className='list-group-item col-3 p-3'>
+        <li className='list-group-item col-3'>
           <Sparklines limit={40} width={200} height={100} data={humidityArray} >
             <SparklinesLine color="#8ed53f" />
             <SparklinesReferenceLine type="avg" />

@@ -19,18 +19,18 @@ const Search = () => {
 
   return (
     <>
-    <div className="container m-4">
-      <form onSubmit={handleSubmit}>
-        <label>Enter City: 
-          <input
+    <div className="d-flex justify-content-center mt-5 col-md-12">
+      <form onSubmit={handleSubmit} className="d-flex">
+        <input
+            className="form-control me-2"
             type="text"
+            placeholder="Enter City Name"
             value={newSearch}
             onChange={(e) => setNewSearch(e.target.value)}
           />
-        </label>
-        <input type="submit" />
+          <button type="submit" className="btn btn-primary">Submit</button>
       </form>
-      </div>
+    </div>
     </>
   )
 
